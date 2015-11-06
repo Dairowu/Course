@@ -1,6 +1,7 @@
 package com.suwan.course.TestFour;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.*;
@@ -27,14 +28,15 @@ public class CompareActivity extends AppCompatActivity implements View.OnClickLi
     private ServiceConnection localConn=null;
 
     private IMyAidlInterface mRemoteAIDL=null;
-    private MyService mLocalService=null;
+    private MyService.SimpleBinder mLocalService=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compare);
         init();
-
+        called_service.setOnClickListener(this);
+        called_remoteservice.setOnClickListener(this);
 
 
     }
@@ -50,47 +52,47 @@ public class CompareActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         boolean isNull=false;
-        isNull=first_number.getText().toString().length()!=0&&
-                second_number.getText().toString().length()!=0;
+        isNull=first_number.getText().toString().length()==0||
+                second_number.getText().toString().length()==0;
         if(!isNull) {
             switch (v.getId()) {
                 case R.id.button:
+                    bindLocalService();
                     //doing something...
                     break;
                 case R.id.button1:
+                    bindRemoteService();
                     //doing something...
                     break;
             }
-        }else Toast.makeText(getApplicationContext(),"输入的数字为空，请重试！",Toast.LENGTH_SHORT).show();
+        }else Toast.makeText(getApplicationContext(),"输入的数字为空，请重新输入！",Toast.LENGTH_SHORT).show();
     }
 
     private void bindLocalService(){
-        startService(new Intent("com.suwan.course.TestFour.MyService"));
-        bindService(new Intent("com.suwan.course.TestFour.MyService"),
-                localConn, BIND_AUTO_CREATE);
+        startService(new Intent(CompareActivity.this,MyService.class));
         final int first_no,second_no;
         first_no=Integer.parseInt(first_number.getText().toString());
         second_no=Integer.parseInt(second_number.getText().toString());
         localConn=new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                mLocalService=MyServiceservice
                 Log.d("Information:","Local Service Connected!");
+                mLocalService=(MyService.SimpleBinder)service;
+                tv.setText(mLocalService.Compare(first_no,second_no)+"");
             }
 
             @Override
             public void onServiceDisconnected(ComponentName name) {
-
+                Log.d("Information:","Local Service Disconnected!");
             }
         };
-
+        bindService(new Intent(CompareActivity.this,MyService.class),
+                localConn, BIND_AUTO_CREATE);
     }
 
 
-    private void bindRemoteService(){
-        startService(new Intent("com.suwan.course.TestFour.MyRemoteService"));
-        bindService(new Intent("com.suwan.course.TestFour.MyRemoteService"),
-                remoteConn,BIND_AUTO_CREATE);
+    private void bindRemoteService() {
+        startService(new Intent(CompareActivity.this,MyRemoteService.class));
         final int first_no,second_no;
         first_no=Integer.parseInt(first_number.getText().toString());
         second_no=Integer.parseInt(second_number.getText().toString());
@@ -103,6 +105,7 @@ public class CompareActivity extends AppCompatActivity implements View.OnClickLi
                 try {
                     int x=mRemoteAIDL.Compare(first_no, second_no);
                     tv.setText(x+"");
+                    Log.v("远程客户端的PID",mRemoteAIDL.getPID()+"");
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -114,6 +117,7 @@ public class CompareActivity extends AppCompatActivity implements View.OnClickLi
                 Log.d("Information:","Remote Service Disconnected!");
             }
         };
-
+        bindService(new Intent(CompareActivity.this,MyRemoteService.class),
+                remoteConn, Context.BIND_AUTO_CREATE);
     }
 }

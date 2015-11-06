@@ -9,4 +9,5 @@ interface IMyAidlInterface {
      * and return values in AIDL.
      */
     int Compare(int x,int y);
+    int getPID();
 }

@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editText;
     private TextView info_detail;
     private Button submit, getInfo;
-    private String fileName = "/mnt/sdcard/CourseDesign", storageFile = "conf.ini";
+    private String fileName = Environment.getExternalStorageDirectory()+"/CourseDesign", storageFile = "conf.ini";
     private File rootPath;
     private static String TAG = "MainActivity";
     private boolean isFileExist = false;

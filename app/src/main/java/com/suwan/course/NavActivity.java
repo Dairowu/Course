@@ -8,8 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.suwan.course.TestFour.CompareActivity;
 import com.suwan.course.TestOne.ActivityOne;
 import com.suwan.course.TestThree.MainActivity;
+import com.suwan.course.TestThree.ManagerActivity;
 import com.suwan.course.TestTwo.Main2Activity;
 
 public class NavActivity extends AppCompatActivity implements View.OnClickListener {
@@ -55,9 +57,10 @@ public class NavActivity extends AppCompatActivity implements View.OnClickListen
                 startActivity(new Intent(NavActivity.this, Main2Activity.class));
                 break;
             case R.id.test6:
+                startActivity(new Intent(NavActivity.this, CompareActivity.class));
                 break;
             case R.id.test7:
-                startActivity(new Intent(NavActivity.this, MainActivity.class));
+                startActivity(new Intent(NavActivity.this, ManagerActivity.class));
                 break;
         }
 

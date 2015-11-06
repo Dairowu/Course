@@ -2,12 +2,13 @@ package com.suwan.course.TestFour;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.IBinder;
-import android.os.RemoteException;
+import android.os.*;
+import android.os.Process;
+import android.util.Log;
 
 public class MyRemoteService extends Service {
 
-    private static String TAG="The Process Id is:";
+    private static String TAG="MyRemoteService's Process Id is:";
 
     private final IMyAidlInterface.Stub mBinder=new IMyAidlInterface.Stub() {
         @Override
@@ -16,13 +17,23 @@ public class MyRemoteService extends Service {
                 return x;
             else return y;
         }
+        public int getPID(){
+           return Process.myPid();
+        }
     };
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
+
     public MyRemoteService() {
+
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+
+       return  mBinder;
     }
 }

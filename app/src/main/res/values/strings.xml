@@ -23,4 +23,7 @@
     <string name="show_info">显示比较信息</string>
     <string name="button">调用进程内service</string>
     <string name="button1">调用远程服务</string>
+    <string name="title_activity_sp">SharePreferences</string>
+    <string name="title_activity_manager">储存方式</string>
+    <string name="title_MainActivity">ini文件储存信息</string>
 </resources>
