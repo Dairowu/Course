@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.suwan.course" >
+
+    <!-- 增加文件读取的权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".TestThree.MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".TestOne.ActivityOne"
+            android:label="@string/title_activity_activity_one" >
+        </activity>
+        <activity
+            android:name=".TestTwo.LoginActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name=".TestTwo.Main2Activity"
+            android:label="@string/title_activity_main2" >
+        </activity>
+        <activity
+            android:name=".NavActivity"
+            android:label="@string/title_activity_nav" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TestFour.CompareActivity"
+            android:label="@string/title_activity_compare" >
+        </activity>
+
+        <service
+            android:name=".TestFour.MyService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <!--这是个远程的service，需要在service目录下加入 android:process=":remote" 属性-->
+        <service
+            android:name=".TestFour.MyRemoteService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.suwan.course.myremoteservice"></action>
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

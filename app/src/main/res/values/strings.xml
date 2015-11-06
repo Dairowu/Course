@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Course</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="input_text">请输入要存储的信息:</string>
+    <string name="submit">提交</string>
+    <string name="get_info">获取储存的信息</string>
+    <string name="info_title">获取到的信息</string>
+    <string name="info_detail">暂时没有内容</string>
+    <string name="title_activity_activity_one">相对布局测试</string>
+    <string name="title_activity_login">登录测试界面</string>
+    <string name="title_activity_main2">主界面</string>
+    <string name="please_login">请您登录</string>
+    <string name="user_name">用户名：</string>
+    <string name="user_pwd">密码：</string>
+    <string name="title_activity_nav">导航</string>
+    <string name="test4">实验四</string>
+    <string name="test5">实验五</string>
+    <string name="test6">实验六</string>
+    <string name="test7">实验七</string>
+    <string name="title_activity_compare">Service测试</string>
+    <string name="show_info">显示比较信息</string>
+    <string name="button">调用进程内service</string>
+    <string name="button1">调用远程服务</string>
+</resources>
